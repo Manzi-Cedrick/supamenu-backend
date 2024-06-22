@@ -24,6 +24,7 @@ User.init(
         },
         email: {
             type: DataTypes.STRING,
+            unique: true,
             allowNull: false,
         },
         password: {
@@ -58,7 +59,9 @@ User.init(
     }
 )
 
-sequelize.sync().catch((error: any) => {
+sequelize.sync({
+    force: false
+}).catch((error: any) => {
     console.error('Error creating tables:', error)
 })
 

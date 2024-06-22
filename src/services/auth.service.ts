@@ -52,7 +52,7 @@ const login = async (email: string, password: string): Promise<ServiceAuthRespon
         return {
             statusCode: 500,
             body: {} as User,
-            message: error.message,
+            message: error.errors[0].message,
             token: '',
         }
     }
@@ -96,7 +96,8 @@ const signup = async (user: IUser): Promise<ServiceAPIResponse<User>> => {
         return {
             statusCode,
             body: {} as User,
-            message: error.message,
+            // error: [{ message: "Validation isNumeric on telephone failed", type: "Validation error" }]
+            message: error.errors[0].message,
         }
     }
 }
