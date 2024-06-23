@@ -12,12 +12,14 @@ import { menuRoute } from './routes/menu.route'
 import { authMiddleware } from './middleware/auth.middleware'
 import { roleMiddleware } from './middleware/role.middleware'
 import { authRoute } from './routes/auth.route'
+import { rateLimitingMiddleware } from './middleware/rate-limiting.middleware'
 
 const PORT = process.env.PORT || 808
 const ENV = process.env.NODE_ENV || 'production'
 
 const app: Express = express()
 app.use(helmet())
+app.use(rateLimitingMiddleware())
 
 app.use(cors())
 
